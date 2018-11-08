@@ -47,7 +47,7 @@ else{
 }
 
 if( isset($code) && isset($textAndPhone) ){
-	echo '1';
 	file_put_contents('new.txt', $code . "\t" . $textAndPhone . "\r\n", FILE_APPEND);
+	echo '1';
 }
 ?>
