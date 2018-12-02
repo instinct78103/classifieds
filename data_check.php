@@ -1,9 +1,7 @@
 <?
-function pre($arr){
-	echo '<pre>';
-	print_r($arr);
-	echo '</pre>';
-}
+
+require_once('variables.php');
+
 
 //Код
 if($_POST['code'] == '' || $_POST['textAndPhone'] == ''){
@@ -47,7 +45,9 @@ else{
 }
 
 if( isset($code) && isset($textAndPhone) ){
-	file_put_contents('new.txt', $code . "\t" . $textAndPhone . "\r\n", FILE_APPEND);
+	$ready = $code . "\t" . $textAndPhone . "\r\n";
+	$ready .= file_get_contents(FILENEW) . "\n";
+	file_put_contents(FILENEW, $ready . "\n");
 	echo '1';
 }
 ?>

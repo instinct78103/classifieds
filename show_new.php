@@ -1,7 +1,6 @@
 <?
-$file = 'new.txt';
-//file_put_contents( $file, array_unique( file($file) ) );
+require_once('variables.php');
 
-foreach(file('new.txt') as $str){
+foreach(file(FILENEW) as $str){
 	echo '<p class="all">' . $str . '</p>';
 }

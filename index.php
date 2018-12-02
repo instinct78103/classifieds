@@ -7,8 +7,8 @@
 	</head>
 	<body>
 		<div id="data">
-			<input autofocus placeholder="Код" id="code" maxlength="3" pattern="[1-6]{1}[0-5]{1}[0-8]{1}"><br><br>
-			<textarea placeholder="Текст, телефон..." id="text"></textarea><br><br>
+			<input placeholder="Код" id="code" maxlength="3" pattern="[1-6]{1}[0-5]{1}[0-8]{1}"><br><br>
+			<textarea autofocus placeholder="Текст, телефон..." id="text"></textarea><br><br>
 			<div id="info"></div>
 		</div>
 		<div id="new_classifieds"></div>

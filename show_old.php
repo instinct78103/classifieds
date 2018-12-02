@@ -1,5 +1,7 @@
 ﻿<?php
-$fileArr = file('old.txt');
+require_once('variables.php');
+
+$fileArr = file(FILEOLD);
 $fileArr = array_values(array_filter($fileArr, "trim"));
 
 foreach($fileArr as $key=>$str){
