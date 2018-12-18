@@ -1,8 +1,6 @@
 <?
 require_once('variables.php');
-echo count(array_count_values(file(FILEOLD))) . '<br>';
+/* echo count(array_count_values(file(FILEOLD))) . '<br>';
 foreach(array_count_values(file(FILEOLD)) as $key=>$item){
-	if($item > 1){
-		echo $key . '<br>';
-	}
-}
+	file_put_contents("new17.txt", "$key\n", FILE_APPEND);
+} */

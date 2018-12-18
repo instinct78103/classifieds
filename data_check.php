@@ -45,9 +45,16 @@ else{
 }
 
 if( isset($code) && isset($textAndPhone) ){
-	$ready = $code . "\t" . $textAndPhone . "\r\n";
-	$ready .= file_get_contents(FILENEW) . "\n";
-	file_put_contents(FILENEW, $ready . "\n");
+	$str = $code . "\t" . $textAndPhone . "\r\n";
+	
+	//$WeekNum.txt
+	$toNew = file_exists(FILENEW) ? $str . file_get_contents(FILENEW) : $str;
+	file_put_contents(FILENEW, $toNew);
+	
+	//backup	
+	$toBackup = file_exists("backup\\" . $WeekNum . "backup.txt") ? $str . file_get_contents("backup\\" . $WeekNum . "backup.txt") : $str;
+	file_put_contents("backup\\" . $WeekNum . "backup.txt", $toBackup);
+	
 	echo '1';
 }
 ?>
