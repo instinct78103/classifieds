@@ -51,3 +51,6 @@
 .all, .matches{
 	margin-bottom: 5px;
 }
+.already{
+	color: red;
+}
