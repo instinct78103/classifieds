@@ -5,3 +5,7 @@ foreach(array_count_values(file(FILEOLD)) as $key=>$item){
 	file_put_contents('created ' . date("Y-m-d") . '.txt', "$key\n", FILE_APPEND);
 }
  */
+ 
+$friday = new DateTime('friday');
+$WeekNum = $friday->format('Y__W');
+echo $WeekNum;

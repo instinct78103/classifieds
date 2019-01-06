@@ -3,7 +3,7 @@
 define(FILEOLD, 'old.txt'); */
 
 $friday = new DateTime('friday');
-$WeekNum = $friday->format('W');
+$WeekNum = $friday->format('Y__W');
 define(FILENEW, $WeekNum . '.txt');
 define(FILEOLD, 'old.txt');
 
