@@ -1,6 +1,9 @@
 ﻿<?php
 require_once('variables.php');
 
+$json = file_get_contents('php://input');
+$_POST = json_decode($json, true);
+
 //Поиск среди свежих объявлений, они будут выделены красным
 $fileArrNew = file_exists(FILENEW) ? file(FILENEW) : [];
 $fileArrNew = array_values(array_filter($fileArrNew, "trim"));

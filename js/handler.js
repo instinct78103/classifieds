@@ -20,8 +20,9 @@ code.oninput = function(){
 
 function showNewClassifieds(){
 	let xhr = new XMLHttpRequest();
-	
 	xhr.open('GET', 'show_new.php')
+	xhr.send();
+	
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
 			newClassifieds.innerHTML = xhr.response
@@ -29,8 +30,7 @@ function showNewClassifieds(){
 		else if(xhr.status != 200){
 			newClassifieds.innerHTML = 'Ошибка: ' + xhr.status
 		}
-	}
-	xhr.send();
+	}	
 }
 
 function start(){
@@ -41,10 +41,14 @@ newClassifieds.onload = start();
 
 
 textAndPhone.oninput = function(){
-	let find = 'find=' + textAndPhone.value;
+	let find = JSON.stringify({
+		"find": textAndPhone.value
+	});
 	let xhr = new XMLHttpRequest();
+	
 	xhr.open('POST', 'show_old.php');
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+	xhr.send(find);
 	
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
@@ -63,18 +67,24 @@ textAndPhone.oninput = function(){
 			oldClassifieds.innerHTML = 'Ошибка: ' + xhr.status;
 		}
 	}
-	
-	xhr.send(find);
 }
 
 textAndPhone.onkeydown = function(event){
 	if(event.which == 13){
 		event.preventDefault();
-		var data = 'code=' + code.value + '&' + 'textAndPhone=' + textAndPhone.value;
 		
-		var xhr = new XMLHttpRequest();
+		let xhr = new XMLHttpRequest();
+		let json = JSON.stringify({
+			"code": code.value,
+			"textAndPhone": textAndPhone.value
+		});
+		
+		//console.log( JSON.parse(json) );
+		
 		xhr.open('POST', 'data_check.php');
-		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+		xhr.send(json);
+		
 		xhr.onreadystatechange = function(){
 			if(xhr.readyState == 4 && xhr.status == 200){
 				if(xhr.responseText == '1'){
@@ -90,6 +100,5 @@ textAndPhone.onkeydown = function(event){
 				}
 			}
 		}
-		xhr.send(data);
 	}				
 }

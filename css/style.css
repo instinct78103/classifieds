@@ -32,10 +32,11 @@
 	position: absolute;
 	width: 33.333%;
 	top: 0;
-	left: 33.333%;
+	left: 66.666%;
 	padding: 10px;
 	height: 100%;
 	overflow: auto;
+	
 }
 #old_classifieds{
 	font: 9pt "Arial";
@@ -43,13 +44,14 @@
 	position: absolute;
 	width: 33.333%;
 	top: 0;
-	left: 66.666%;
+	left: 33.333%;
 	padding: 10px;
 	height: 100%;
 	overflow: auto;
 }
 .all, .matches{
 	margin-bottom: 5px;
+	font: 9pt "Arial";
 }
 .already{
 	color: red;

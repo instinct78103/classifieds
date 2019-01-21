@@ -2,6 +2,8 @@
 
 require_once('variables.php');
 
+$json = file_get_contents('php://input');
+$_POST = json_decode($json, true);
 
 //Код
 if($_POST['code'] == '' || $_POST['textAndPhone'] == ''){
@@ -36,8 +38,8 @@ elseif( strlen($_POST['code']) == 3 && preg_match('~([0-9])([0-9])([0-9])~', $_P
 }
 
 //Текст
-if( mb_strlen(trim($_POST['textAndPhone']), 'UTF8') == 1 ){
-	echo 'Один символ не допускается!' . '<br>';
+if( mb_strlen(trim($_POST['textAndPhone']), 'UTF8') < 7 ){
+	echo 'Не менее 7 символов в тексте!' . '<br>';
 }
 else{
 	$textAndPhone = trim($_POST['textAndPhone']);
@@ -57,4 +59,5 @@ if( isset($code) && isset($textAndPhone) ){
 	
 	echo '1';
 }
+
 ?>
