@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF8">
-		<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+		<meta charset="utf8">
 		<link rel="stylesheet" href="css/style.css">
+		<title>MEDIA</title>
 	</head>
 	<body>
 		<div id="data">
-			<input placeholder="Код" id="code" maxlength="3" pattern="[1-6]{1}[0-5]{1}[0-8]{1}"><br><br>
-			<textarea autofocus placeholder="Текст, телефон..." id="text"></textarea><br><br>
+			<input placeholder="Код" id="code" tabindex="2"><br><br>
+			<textarea autofocus placeholder="Текст, телефон" id="text" tabindex="1"></textarea><br><br>
 			<div id="info"></div>
 		</div>
 		<div id="new_classifieds"></div>
