@@ -1,63 +1,50 @@
 <?
-
 require_once('variables.php');
 
 $json = file_get_contents('php://input');
 $_POST = json_decode($json, true);
 
-//Код
-if($_POST['code'] == '' || $_POST['textAndPhone'] == ''){
-	echo 'Заполните все поля!' . '<br>';
-}
-elseif( strlen($_POST['code']) !== 3 || preg_match('~\D~ui', $_POST['code']) ){
-	echo 'Только 3 цифры в коде!' . '<br>';
-}
-elseif( strlen($_POST['code']) == 3 && preg_match('~([0-9])([0-9])([0-9])~', $_POST['code'], $matches) ){
-	//pre($matches);
-	if($matches[1] == 1 && $matches[2] >= 1 && $matches[2] <= 5 && $matches[3] >= 0 && $matches[3] <= 8){
-		$code = $_POST['code'];
-	}
-	elseif($matches[1] == 2 && $matches[2] >= 1 && $matches[2] <= 5 && $matches[3] >= 1 && $matches[3] <= 5){
-		$code = $_POST['code'];
-	}
-	elseif($matches[1] == 3 && $matches[2] >= 1 && $matches[2] <= 2 && $matches[3] >= 1 && $matches[3] <= 5){
-		$code = $_POST['code'];
-	}
-	elseif($matches[1] == 4 && $matches[2] >= 1 && $matches[2] <= 4 && $matches[3] >= 1 && $matches[3] <= 6){
-		$code = $_POST['code'];
-	}
-	elseif($matches[1] == 5 && $matches[2] >= 0 && $matches[2] <= 2 && $matches[3] == 0){
-		$code = $_POST['code'];
-	}
-	elseif($matches[1] == 6 && $matches[2] >= 1 && $matches[2] <= 2 && $matches[3] == 0){
-		$code = $_POST['code'];
-	}
-	else{
-		echo 'Ошибка в коде!' . '<br>';
-	}
-}
+$errors = [];
 
-//Текст
-if( mb_strlen(trim($_POST['textAndPhone']), 'UTF8') < 7 ){
-	echo 'Не менее 7 символов в тексте!' . '<br>';
+if($_POST['code'] == '' || $_POST['textAndPhone'] == ''){
+	$errors[] = 'Заполните все поля';
 }
 else{
-	$textAndPhone = trim($_POST['textAndPhone']);
-	$textAndPhone = preg_replace('~[.,!?]+$~ui', '', $textAndPhone);
+	//Код
+	$proceed = false;
+	foreach(CODES as $item){
+		if($proceed) continue;
+		if( preg_match("~^{$item}$~", $_POST['code']) ){
+			$proceed = true;
+		}
+	}
+	if(!$proceed) {
+		$errors[] = 'Ошибка в коде';
+	}
+	//Текст
+	$_POST['textAndPhone'] = preg_replace( '~[.,!?//-]+$~ui', '', trim($_POST['textAndPhone']));
+	$_POST['textAndPhone'] = preg_replace( '~\s{2,}~', ' ', $_POST['textAndPhone']);
+	
+	if( mb_strlen($_POST['textAndPhone'], 'UTF8') < 7 ){
+		$errors[] = 'Не менее 7 символов';
+	}
 }
 
-if( isset($code) && isset($textAndPhone) ){
+if(!empty($errors)){
+	echo array_shift($errors);
+}
+else{
+	$code = $_POST['code'];
+	$textAndPhone = $_POST['textAndPhone'];
 	$str = $code . "\t" . $textAndPhone . "\r\n";
 	
 	//$WeekNum.txt
 	$toNew = file_exists(FILENEW) ? $str . file_get_contents(FILENEW) : $str;
 	file_put_contents(FILENEW, $toNew);
 	
-	//backup	
+	//backup
 	$toBackup = file_exists("backup\\" . $WeekNum . "backup.txt") ? $str . file_get_contents("backup\\" . $WeekNum . "backup.txt") : $str;
 	file_put_contents("backup\\" . $WeekNum . "backup.txt", $toBackup);
 	
 	echo '1';
 }
-
-?>
