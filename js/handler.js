@@ -89,7 +89,7 @@ textAndPhone.onkeydown = function(event){
 			if(xhr.readyState == 4 && xhr.status == 200){
 				if(xhr.responseText == '1'){
 					code.value = '';
-					code.focus();
+					textAndPhone.focus();
 					textAndPhone.value = '';
 					oldClassifieds.innerHTML = '';
 					info.innerHTML = '';
