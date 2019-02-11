@@ -1,11 +1,11 @@
 <?
 require_once('variables.php');
-/* echo count(array_count_values(file(FILEOLD))) . '<br>';
-foreach(array_count_values(file(FILEOLD)) as $key=>$item){
-	file_put_contents('created ' . date("Y-m-d") . '.txt', "$key\n", FILE_APPEND);
-}
- */
- 
-$friday = new DateTime('friday');
-$WeekNum = $friday->format('Y__W');
-echo $WeekNum;
+
+/* $old = file('old.txt');
+
+echo count(array_unique($old));
+echo '<br>';
+
+foreach(array_values(array_filter(array_unique($old), "trim")) as $item){
+	file_put_contents('oooo.txt', "$item\n", FILE_APPEND);
+} */
