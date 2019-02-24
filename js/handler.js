@@ -69,36 +69,52 @@ textAndPhone.oninput = function(){
 	}
 }
 
-textAndPhone.onkeydown = function(event){
-	if(event.which == 13){
-		event.preventDefault();
-		
-		let xhr = new XMLHttpRequest();
-		let json = JSON.stringify({
-			"code": code.value,
-			"textAndPhone": textAndPhone.value
-		});
-		
-		//console.log( JSON.parse(json) );
-		
-		xhr.open('POST', 'data_check.php');
-		xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-		xhr.send(json);
-		
-		xhr.onreadystatechange = function(){
-			if(xhr.readyState == 4 && xhr.status == 200){
-				if(xhr.responseText == '1'){
-					code.value = '';
-					textAndPhone.focus();
-					textAndPhone.value = '';
-					oldClassifieds.innerHTML = '';
-					info.innerHTML = '';
-					setTimeout('info.innerHTML = ""', 3000);
-				}
-				else{
-					info.innerHTML = xhr.response;
+
+//Формируем массив из двух элементов, чтобы потом произвести перебор
+let elems = [code, textAndPhone];
+elems.forEach(function(item){
+	item.onkeydown = function(event){
+		//если нажата клавиша TAB, переключаем курсор 
+		if(event.which == 9){
+			if(item == code){
+				textAndPhone.focus();
+			}
+			else{
+				code.focus();
+			}
+			return false;
+		}
+		//если нажат ENTER
+		else if(event.which == 13){
+			event.preventDefault();
+			
+			let xhr = new XMLHttpRequest();
+			let json = JSON.stringify({
+				"code": code.value,
+				"textAndPhone": textAndPhone.value
+			});
+			
+			//console.log( JSON.parse(json) );
+			
+			xhr.open('POST', 'data_check.php');
+			xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+			xhr.send(json);
+			
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState == 4 && xhr.status == 200){
+					if(xhr.responseText == '1'){
+						code.value = '';
+						textAndPhone.focus();
+						textAndPhone.value = '';
+						oldClassifieds.innerHTML = '';
+						info.innerHTML = '';
+						setTimeout('info.innerHTML = ""', 3000);
+					}
+					else{
+						info.innerHTML = xhr.response;
+					}
 				}
 			}
 		}
-	}				
-}
+	}
+});
