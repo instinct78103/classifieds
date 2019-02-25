@@ -32,6 +32,9 @@ else{
 	//backup
 	$toBackup = file_exists("backup\\" . $WeekNum . "backup.txt") ? $str . file_get_contents("backup\\" . $WeekNum . "backup.txt") : $str;
 	file_put_contents("backup\\" . $WeekNum . "backup.txt", $toBackup);
+	//old.txt
+	$toOld = file_exists(FILEOLD) ? $str . file_get_contents(FILEOLD) : $str;
+	file_put_contents(FILEOLD, $toOld);
 	
 	echo '1';
 }
