@@ -27,14 +27,11 @@ else{
 	$str = $code . "\t" . $textAndPhone . "\r\n";
 	
 	//$WeekNum.txt
-	$toNew = file_exists(FILENEW) ? $str . file_get_contents(FILENEW) : $str;
-	file_put_contents(FILENEW, $toNew);
+	paste_str(FILENEW, $str);
 	//backup
-	$toBackup = file_exists("backup\\" . $WeekNum . "backup.txt") ? $str . file_get_contents("backup\\" . $WeekNum . "backup.txt") : $str;
-	file_put_contents("backup\\" . $WeekNum . "backup.txt", $toBackup);
+	paste_str("backup\\" . $WeekNum . "backup.txt", $str);
 	//old.txt
-	$toOld = file_exists(FILEOLD) ? $str . file_get_contents(FILEOLD) : $str;
-	file_put_contents(FILEOLD, $toOld);
+	paste_str(FILEOLD, $str);
 	
 	echo '1';
 }

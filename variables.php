@@ -20,3 +20,49 @@ function pre($arr){
 	print_r($arr);
 	echo '</pre>';
 }
+function txt_cleaner($txt){
+	//Функция берет файловые массив и возвращает массив без пустых значений
+	$fileArr = file($txt);
+	$fileArr = array_values(array_filter($fileArr, "trim"));
+	return $fileArr;
+}
+function searching($txt, $pattern){
+	//Функция производит поиск по файлу согласно введенной строке
+	if(file_exists($txt)){
+		$fileArr = file($txt);
+		foreach($fileArr as $key=>$str){
+			$fileArr[$key] = trim(iconv("windows-1251", "utf-8", $str));
+			if($pattern && preg_match("~" . quotemeta($pattern) . "~ui", $str)){
+				if($txt == FILENEW){
+					echo '<p class="matches already">' . $str . '</p>';
+				}
+				else{
+					echo '<p class="matches">' . $str . '</p>';
+				}
+			}
+		}
+	}
+}
+function paste_str($txt, $str){
+	//Функция вставляет ТОЛЬКО уникальные строки в txt-файл, причем каждая новая строка будет в начале файла
+	//quotemeta() - экранирует символы . \ + * ? [ ^ ] ( $ ) в регулярном выражении.
+	$counter = 0;
+	if(file_exists($txt)){
+		//txt_cleaner($txt);
+		foreach(txt_cleaner($txt) as $item){
+			if(preg_match("~" . quotemeta($str) . "~ui", $item)){
+				$counter++;
+			}
+		}
+		if(!$counter){
+			$newStr = $str . file_get_contents($txt);
+		}
+		else{
+			$newStr = file_get_contents($txt);
+		}
+	}
+	else{
+		$newStr = $str;
+	}
+	file_put_contents($txt, $newStr);
+}
