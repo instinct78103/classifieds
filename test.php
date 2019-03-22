@@ -99,10 +99,6 @@ function showReps($txt){
     }
     return preg_split("//u", $str, -1, PREG_SPLIT_NO_EMPTY);
 } */
-
-/* foreach($arr as $item){
-	pre(str_split_unicode(preg_replace('~[\s\,\.\+\-//\(\)]~', '', trim($item))));
-} */
 ?>
 
 <!doctype html>
@@ -111,7 +107,7 @@ function showReps($txt){
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="css/style.css">
 	<style>
-		img{
+		img.delete{
 			position: absolute;
 			display: none;
 			height: 15px;
@@ -119,6 +115,9 @@ function showReps($txt){
 		}
 		p:hover img{
 			display: inline;
+		}
+		.dublicate{
+			font-family: "Courier";
 		}
 	</style>
 	<title>CLC</title>
@@ -128,9 +127,9 @@ function showReps($txt){
 	<?
 		$array = file('old.txt');
 		foreach(showReps('old.txt') as $key=>$item){
-			echo "<p style=\"font-weight: bold\" id=\"$key\">$array[$key]<img class=\"delete\" src=\"https://img.icons8.com/flat_round/64/000000/delete-sign.png\"></p>";
+			echo "<p class=\"dublicate\" style=\"font-weight: bold\" id=\"$key\">$array[$key]<img class=\"delete\" src=\"https://img.icons8.com/flat_round/64/000000/delete-sign.png\"></p>";
 			foreach($item as $nkey=>$nitem){
-				echo "<p id=\"$nkey\">$nitem<img class=\"delete\" src=\"https://img.icons8.com/flat_round/64/000000/delete-sign.png\"></p>";
+				echo "<p class=\"dublicate\" id=\"$nkey\">$nitem<img class=\"delete\" src=\"https://img.icons8.com/flat_round/64/000000/delete-sign.png\"></p>";
 			}
 			echo '<br><br>';
 		}
