@@ -2,6 +2,19 @@
 
 require_once('variables.php');
 
+$json = file_get_contents('php://input');
+$_POST = json_decode($json, true);
+
+if(isset($_POST['str'])){
+	$array = file('old.txt');
+	unset($array[$_POST['str']]);
+	file_put_contents('old.txt', null);
+	foreach($array as $key=>$item){
+		file_put_contents('old.txt', $item, FILE_APPEND);
+	}
+}
+
+
 function breakToParts($txt){
 	//Функция, которая каждое объявление превращает в массив: 
 	//[0] - код рубрики
@@ -27,7 +40,6 @@ function breakToParts($txt){
 	}
 	return $new;
 }
-
 function showReps($txt){
 	//Вывести на экран повторы
 	$old = file($txt);
@@ -39,22 +51,42 @@ function showReps($txt){
 			if($key != $nkey && $key < $nkey){
 			
 				if(
+				
 				//если кодировка совпадает
 				$arr[$key][0] == $arr[$nkey][0] &&
 				//если телефон совпадает
 				$arr[$key][2] == $arr[$nkey][2] &&
 				//если текст без знаков препинания совпадает
 				mb_strlen(preg_replace('~[\s\,\.\+\-//\(\)]~', '', trim($arr[$key][1]))) == mb_strlen(preg_replace('~[\s\,\.\+\-//\(\)]~', '', trim($arr[$nkey][1])))
-				/*   && mb_substr($arr[$key][2], 15) ==  mb_substr($arr[$nkey][2], 15) */
+				
 				){
-					echo '<p id="' .$key . '">' . $old[$key] . '</p>' . '<p id="' .$nkey . '">' . $old[$nkey] . '</p>' . '<br><br>';
+					$new[$key][$nkey] = $old[$nkey];
+					unset($old[$nkey]);
+
+					/* echo '<p>' . $key . ': ' . $old[$key] . '<p>';
+					echo '<p>' . $nkey . ': ' . $old[$nkey] . '<p><br><br>'; */
 				}
 			
 			}
 		}
 	}
 	
+	foreach($new as $key=>$item){
+		foreach($item as $nkey=>$nitem){
+			if(empty($new[$key][$nkey])){
+				unset($new[$key]);
+			}
+		}
+		
+	}
+	
+	return $new;
+	
 }
+
+
+
+
 
 /* function str_split_unicode($str, $l = 0) {
     if ($l > 0) {
@@ -78,15 +110,51 @@ function showReps($txt){
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="css/style.css">
+	<style>
+		img{
+			position: absolute;
+			display: none;
+			height: 15px;
+			margin-left: 10px;
+		}
+		p:hover img{
+			display: inline;
+		}
+	</style>
 	<title>CLC</title>
 </head>
 <body>
 	<div id="found">
 	<?
-		showReps('old.txt');
+		$array = file('old.txt');
+		foreach(showReps('old.txt') as $key=>$item){
+			echo "<p style=\"font-weight: bold\" id=\"$key\">$array[$key]<img class=\"delete\" src=\"https://img.icons8.com/flat_round/64/000000/delete-sign.png\"></p>";
+			foreach($item as $nkey=>$nitem){
+				echo "<p id=\"$nkey\">$nitem<img class=\"delete\" src=\"https://img.icons8.com/flat_round/64/000000/delete-sign.png\"></p>";
+			}
+			echo '<br><br>';
+		}
+		
 		
 	?>
-	</div>	
+	</div>
+	<script>
+		trashes = document.querySelectorAll('.delete');
+		for(let i = 0; i < trashes.length; i++){
+			trashes[i].onclick = function(){
+				//console.log(trashes[i].parentElement.id);
+				let str = JSON.stringify({
+					"str": trashes[i].parentElement.id
+				});
+				console.log(str);
+				
+				let xhr = new XMLHttpRequest();
+				xhr.open('POST', 'test.php');
+				xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+				xhr.send(str);
+			}
+		}
+	</script>
 </body>
 </html>
 
