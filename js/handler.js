@@ -116,5 +116,13 @@ elems.forEach(function(item){
 				}
 			}
 		}
+		//Ctrl + Space
+		else if(event.ctrlKey && event.which == 32){
+			found = newClassifieds.children[0]
+			.innerText
+			.match(/[.] ([0-9].+)$/);
+			textAndPhone.value = found[1].trim()
+			//console.table(found);
+		}
 	}
 });
