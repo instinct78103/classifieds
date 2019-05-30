@@ -72,9 +72,9 @@ textAndPhone.oninput = function(){
 
 //Формируем массив из двух элементов, чтобы потом произвести перебор
 let elems = [code, textAndPhone];
-elems.forEach(function(item){
+for(item of elems){
 	item.onkeydown = function(event){
-		//если нажата клавиша TAB, переключаем курсор 
+		//клавиша TAB, переключаем курсор 
 		if(event.which == 9){
 			if(item == code){
 				textAndPhone.focus();
@@ -84,7 +84,7 @@ elems.forEach(function(item){
 			}
 			return false;
 		}
-		//если нажат ENTER
+		//клавиша ENTER
 		else if(event.which == 13){
 			event.preventDefault();
 			
@@ -93,8 +93,6 @@ elems.forEach(function(item){
 				"code": code.value,
 				"textAndPhone": textAndPhone.value
 			});
-			
-			//console.log( JSON.parse(json) );
 			
 			xhr.open('POST', 'data_check.php');
 			xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
@@ -116,13 +114,12 @@ elems.forEach(function(item){
 				}
 			}
 		}
-		//Ctrl + Space
+		//клавишы CTRL + SPACE
 		else if(event.ctrlKey && event.which == 32){
 			found = newClassifieds.children[0]
 			.innerText
 			.match(/[.] ([0-9].+)$/);
 			textAndPhone.value = found[1].trim()
-			//console.table(found);
 		}
 	}
-});
+}
