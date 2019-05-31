@@ -6,17 +6,15 @@ const newClassifieds = document.querySelector('#new_classifieds');
 
 //После ввода третьего символа в коде курсор перескакивает на ввод текста ниже
 
-code.oninput = function(){
+code.oninput = () => {
 	code.value = code.value.replace(/[^\d]/, '');
-	if(code.value.length == 3){
+	if(code.value.length >= 3){
 		text.focus();
 	}
 }
 
 textAndPhone.oninput = searching;
-
 newClassifieds.onready = start();
-
 
 function showNewClassifieds(){
 	let xhr = new XMLHttpRequest();
@@ -56,9 +54,8 @@ function searching(phpHandler){
 				elem.ondblclick = function(){
 					let strArr = elem.innerHTML.split('	');
 					code.value = strArr[0];
-					textAndPhone.value = strArr[1];
+					textAndPhone.value = strArr[1].replace(/[\n]/, '');
 					textAndPhone.focus();
-					textAndPhone.value = textAndPhone.value.replace(/[\n]/, '');
 				} 
 			}
 		}
@@ -111,12 +108,12 @@ for(let elem of elems){
 		}
 		//клавишы CTRL + SPACE
 		else if(event.ctrlKey && event.which == 32 && newClassifieds.innerHTML){
-				found = newClassifieds.children[0]
-				.innerText
-				.match(/[.] ([0-9].+)$/);
-				textAndPhone.value = found[1].trim();
-				//и здесь же поиск
-				searching();
+			found = newClassifieds.children[0]
+			.innerText
+			.match(/[.] ([0-9].+)$/);
+			textAndPhone.value = found[1].trim();
+			//и здесь же поиск
+			searching();
 		}
 	}
 }

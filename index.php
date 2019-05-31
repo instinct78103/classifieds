@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf8">
+		<meta charset="utf8" name="viewport" content="width=device-width">
 		<link rel="stylesheet" href="css/style.css">
 		<title>MEDIA</title>
 	</head>
