@@ -110,13 +110,13 @@ for(let elem of elems){
 			}
 		}
 		//клавишы CTRL + SPACE
-		else if(event.ctrlKey && event.which == 32){
-			found = newClassifieds.children[0]
-			.innerText
-			.match(/[.] ([0-9].+)$/);
-			textAndPhone.value = found[1].trim();
-			//и тут же проводим поиск
-			searching();
+		else if(event.ctrlKey && event.which == 32 && newClassifieds.innerHTML){
+				found = newClassifieds.children[0]
+				.innerText
+				.match(/[.] ([0-9].+)$/);
+				textAndPhone.value = found[1].trim();
+				//и здесь же поиск
+				searching();
 		}
 	}
 }
