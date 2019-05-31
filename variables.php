@@ -21,7 +21,7 @@ function pre($arr){
 	echo '</pre>';
 }
 function txt_cleaner($txt){
-	//Функция берет файловые массив и возвращает массив без пустых значений
+	//Функция берет файловый массив и возвращает массив без пустых значений
 	$fileArr = file($txt);
 	$fileArr = array_values(array_filter($fileArr, "trim"));
 	return $fileArr;
