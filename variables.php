@@ -64,5 +64,5 @@ function paste_str($txt, $str){
 	else{
 		$newStr = $str;
 	}
-	file_put_contents($txt, $newStr);
+	file_put_contents($txt, $newStr, LOCK_EX);
 }
