@@ -30,6 +30,7 @@ function searching($txt, $pattern){
 	//Функция производит поиск по файлу согласно введенной строке
 	if(file_exists($txt)){
 		$fileArr = file($txt);
+		asort($fileArr);
 		foreach($fileArr as $key=>$str){
 			$fileArr[$key] = trim(iconv("windows-1251", "utf-8", $str));
 			if($pattern && preg_match("~" . quotemeta($pattern) . "~ui", $str)){
