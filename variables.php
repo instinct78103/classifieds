@@ -1,5 +1,5 @@
 <?
-define(CODES, 
+define('CODES',
 [
 '[1][1-5][0-8]',
 '[2][1-4][1-4]',
@@ -12,8 +12,8 @@ define(CODES,
 
 $friday = new DateTime('friday');
 $WeekNum = $friday->format('Y__W');
-define(FILENEW, $WeekNum . '.txt');
-define(FILEOLD, 'old.txt');
+define('FILENEW', $WeekNum . '.txt');
+define('FILEOLD', 'old.txt');
 
 function pre($arr){
 	echo '<pre>';
