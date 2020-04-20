@@ -31,7 +31,7 @@ else{
 	//$WeekNum.txt
 	paste_str(FILENEW, $str);
 	//backup
-	paste_str("backup\\" . $WeekNum . "backup.txt", $str);
+	paste_str("backup/" . $WeekNum . "backup.txt", $str);
 	//old.txt
 	paste_str(FILEOLD, $str);
 	
