@@ -10,7 +10,7 @@
             <div id="data">
                 <p><input placeholder="Код" id="code" tabindex="2"></p>
                 <p><textarea autofocus placeholder="Текст, телефон" id="text" tabindex="1"></textarea></p>
-                <p><a id="download" href="/downloadfile.php">Скачать файл</a></p>
+                <p><a id="download" href="downloadfile.php">Скачать файл</a></p>
                 <div id="info"></div>
             </div>
             <div id="new_classifieds"></div>
