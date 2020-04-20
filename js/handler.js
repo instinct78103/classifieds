@@ -3,6 +3,7 @@ const textAndPhone = document.querySelector('#text');
 const info = document.querySelector('#info');
 const oldClassifieds = document.querySelector('#old_classifieds');
 const newClassifieds = document.querySelector('#new_classifieds');
+const dwlbutton = document.querySelector('#download')
 
 //После ввода третьего символа в коде курсор перескакивает на ввод текста ниже
 
@@ -11,6 +12,26 @@ code.oninput = () => {
 	if(code.value.length >= 3){
 		text.focus();
 	}
+}
+
+/*dwlbutton.onclick = () => {
+	let xhr = new XMLHttpRequest();
+	xhr.open('GET', 'downloadFile.php')
+	xhr.send();
+
+	xhr.onreadystatechange = () => {
+		if(xhr.readyState == 4 && xhr.status == 200){
+			info.innerHTML = xhr.response
+		}
+		else if(xhr.status != 200){
+			info.innerHTML = 'Ошибка: ' + xhr.status
+		}
+	}
+}*/
+
+code.onpaste = (e) => {
+	e.preventDefault();
+	e.stopPropagation();
 }
 
 textAndPhone.oninput = searching;

@@ -6,16 +6,28 @@
 	font-family: 'Roboto Mono', monospace;
 	box-sizing: border-box;
 }
+
+.container{
+	position: relative;
+	height: 100vh;
+}
+
 #data{
 	width: 33.333%;
 	height: 100%;
 	padding: 10px;
 }
+
+#data p{
+	margin-bottom: 3%;
+}
+
 #info{
 	width: 100%;
 	max-width: 421.33px;
 	height: 40px;
 	color: orange;
+	margin-top: 9%;
 }
 #code{
 	width: 34px;
@@ -24,7 +36,6 @@
 	text-align: left;
 }
 #text{
-	height: 16px;
 	width: 100%;
 	height: 80px;
 	resize: none;
