@@ -12,6 +12,11 @@
                 <p><textarea autofocus placeholder="Текст, телефон" id="text" tabindex="1"></textarea></p>
                 <p><a id="download" href="downloadfile.php">Скачать файл</a></p>
                 <div id="info"></div>
+                <div class="codes"></div>
+                <div class="hint">
+                    <p class="bold">Горячие клавишы</p>
+                    <p>CTRL + Пробел: возвращает последний введенный номер телефона</p>
+                </div>
             </div>
             <div id="new_classifieds"></div>
             <div id="old_classifieds"></div>

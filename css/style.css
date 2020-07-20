@@ -71,3 +71,22 @@
 .already{
 	color: red;
 }
+
+.codes{
+	background: url(/img/codes.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	padding-top: 90%;
+	width: 100%;
+	margin: 50px 0;
+}
+
+#data .hint p{
+	font-size: 12px;
+	margin-bottom: 0;
+	width: 50%;
+}
+
+.bold{
+	font-weight: bold;
+}
