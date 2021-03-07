@@ -27,13 +27,35 @@ else{
 	$code = $_POST['code'];
 	$textAndPhone = $_POST['textAndPhone'];
 	$str = $code . "\t" . $textAndPhone . "\r\n";
-	
+
 	//$WeekNum.txt
 	paste_str(FILENEW, $str);
 	//backup
 	paste_str("backup/" . $WeekNum . "backup.txt", $str);
 	//old.txt
 	paste_str(FILEOLD, $str);
-	
+
 	echo 'Success! New line has been added!';
 }
+
+//$conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD);
+//if ($conn->connect_error){
+//    die('Connection error');
+//}
+//
+//if( mysqli_select_db($conn, DB_NAME) ) {
+//    $sql = 'SELECT * FROM '. DB_NAME . '.old';
+//}
+//else{
+//    $sql = 'CREATE DATABASE IF NOT EXISTS '. DB_NAME;
+//    echo 'Database created successfully!';
+//}
+//
+//$result = $conn->query($sql);
+//$row = $result -> fetch_all(MYSQLI_ASSOC);
+//pre(json_encode($row, JSON_UNESCAPED_UNICODE));
+//var_dump($row);
+
+//if($conn){
+//    exit('Ошибка подключения к базе: ' . $conn->connect_error);
+//}

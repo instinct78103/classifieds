@@ -1,5 +1,11 @@
 <?
-define('CODES',
+
+define( 'DB_NAME', 'classifieds' );
+define( 'DB_USER', 'root' );
+define( 'DB_PASSWORD', '' );
+define( 'DB_HOST', 'localhost' );
+
+define( 'CODES',
 [
 '[1][1-5][0-8]',
 '[2][1-4][1-4]',
@@ -8,7 +14,7 @@ define('CODES',
 '[4][1-4][1-6]',
 '[5][0-2][0]',
 '[6][0][0]'
-]);
+] );
 
 $friday = new DateTime('friday');
 $WeekNum = $friday->format('Y__W');

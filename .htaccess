@@ -1,0 +1,6 @@
+AddDefaultCharset utf-8
+Header set Access-Control-Allow-Origin "*"
+
+RewriteEngine on
+RewriteBase /
+RewriteRule ^(.*)$ index2.php
